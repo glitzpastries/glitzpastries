@@ -494,26 +494,64 @@
                 </div>
             </div>
 
-            <!-- GCash Payment Box -->
-            <div class="space-y-3">
-                <div class="border-b border-glitz-lavenderSoft pb-1">
-                    <h3 class="font-cute text-xs font-bold uppercase tracking-wider text-glitz-lavenderDark">4. GCash Payment</h3>
-                </div>
-                
-                <div class="p-3.5 bg-white border-2 border-glitz-lavenderSoft rounded-2xl space-y-2.5 text-xs">
-                    <div class="flex items-center justify-between">
-                        <span class="font-bold text-glitz-plum">GCash Number:</span>
-                        <div class="flex items-center gap-1.5 bg-glitz-lavenderSoft px-2.5 py-1 rounded-xl">
-                            <span class="font-mono font-bold text-glitz-plum">09944824652</span>
-                            <button onclick="copyNumber('09944824652')" class="text-[10px] uppercase font-cute font-bold text-glitz-lavenderDark hover:underline ml-1">Copy</button>
-                        </div>
-                    </div>
-                    <p class="text-[11px] text-glitz-plum/90 bg-glitz-blushSoft p-2.5 rounded-xl border border-glitz-blush leading-relaxed">
-                        Note: Please take a screenshot of your GCash payment and send it along with your order summary!
-                    </p>
-                </div>
+        <!-- Payment Method Selection -->
+<div class="space-y-3">
+    <div class="border-b border-glitz-lavenderSoft pb-1">
+        <h3 class="font-cute text-xs font-bold uppercase tracking-wider text-glitz-lavenderDark">4. Payment Method</h3>
+    </div>
+
+    <!-- Radio Options -->
+    <div class="grid grid-cols-2 gap-3">
+        <label class="flex items-center gap-2 p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl cursor-pointer hover:border-glitz-plum transition-all">
+            <input type="radio" name="payment_method" value="gcash" checked onchange="togglePaymentBox()" class="accent-glitz-plum">
+            <span class="text-xs font-bold text-glitz-plum">GCash</span>
+        </label>
+        
+        <label class="flex items-center gap-2 p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl cursor-pointer hover:border-glitz-plum transition-all">
+            <input type="radio" name="payment_method" value="cod" onchange="togglePaymentBox()" class="accent-glitz-plum">
+            <span class="text-xs font-bold text-glitz-plum">Cash on Delivery</span>
+        </label>
+    </div>
+
+    <!-- GCash Details Box -->
+    <div id="gcash-box" class="p-3.5 bg-white border-2 border-glitz-lavenderSoft rounded-2xl space-y-2.5 text-xs">
+        <div class="flex items-center justify-between">
+            <span class="font-bold text-glitz-plum">GCash Number:</span>
+            <div class="flex items-center gap-1.5 bg-glitz-lavenderSoft px-2.5 py-1 rounded-xl">
+                <span class="font-mono font-bold text-glitz-plum">09944824652</span>
+                <button type="button" onclick="copyNumber('09944824652')" class="text-[10px] uppercase font-cute font-bold text-glitz-lavenderDark hover:underline ml-1">Copy</button>
             </div>
         </div>
+        <p class="text-[11px] text-glitz-plum/90 bg-glitz-blushSoft p-2.5 rounded-xl border border-glitz-blush leading-relaxed">
+            Note: Please take a screenshot of your GCash payment and send it along with your order summary!
+        </p>
+    </div>
+
+    <!-- COD Details Box -->
+    <div id="cod-box" class="hidden p-3.5 bg-white border-2 border-glitz-lavenderSoft rounded-2xl text-xs">
+        <p class="text-[11px] text-glitz-plum/90 bg-glitz-blushSoft p-2.5 rounded-xl border border-glitz-blush leading-relaxed">
+            Note: Please prepare the exact payment amount upon pickup or delivery!
+        </p>
+    </div>
+</div>
+
+<!-- JavaScript Toggle Handler -->
+<script>
+function togglePaymentBox() {
+    const isGcash = document.querySelector('input[name="payment_method"][value="gcash"]').checked;
+    const gcashBox = document.getElementById('gcash-box');
+    const codBox = document.getElementById('cod-box');
+
+    if (isGcash) {
+        gcashBox.classList.remove('hidden');
+        codBox.classList.add('hidden');
+    } else {
+        gcashBox.classList.add('hidden');
+        codBox.classList.remove('hidden');
+    }
+}
+</script>
+
 
         <div class="p-4 bg-white border-t-2 border-glitz-lavenderSoft">
             <button onclick="generateOrderReceipt()" class="w-full cute-btn py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
