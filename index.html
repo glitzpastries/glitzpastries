@@ -6,10 +6,10 @@
     <title>Glitzpastries - Pre-Order Store</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Great+Vibes&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -18,16 +18,22 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            bg: '#f9f8f6',
-                            card: '#ffffff',
-                            border: '#1a1a1a',
-                            muted: '#f0ede6',
-                            accent: '#1a1a1a',
+                        glitz: {
+                            cream: '#FAF6F0',
+                            card: '#FFFFFF',
+                            lavender: '#B49FCC',
+                            lavenderSoft: '#E8DFEE',
+                            lavenderDark: '#8F72AC',
+                            plum: '#3C224C',
+                            plumLight: '#5C3872',
+                            blush: '#F4DDE4',
+                            blushSoft: '#FCF3F5',
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Quicksand', 'sans-serif'],
+                        cute: ['Fredoka', 'sans-serif'],
+                        script: ['Great Vibes', 'cursive'],
                     }
                 }
             }
@@ -35,462 +41,553 @@
     </script>
     
     <style>
-        html, body {
-            background-color: #f9f8f6;
-            color: #1a1a1a;
-            font-family: 'Inter', sans-serif;
-            min-height: 100%;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
+        body {
+            background-color: #FAF6F0;
+            color: #3C224C;
+            font-family: 'Quicksand', sans-serif;
+            background-image: radial-gradient(#B49FCC 0.6px, transparent 0.6px);
+            background-size: 20px 20px;
         }
 
-        /* Custom crisp borders and clean shadows */
-        .border-crisp {
-            border: 1.5px solid #1a1a1a;
+        .cute-card {
+            background: #ffffff;
+            border: 2px solid #E8DFEE;
+            box-shadow: 0 10px 25px -5px rgba(180, 159, 204, 0.25);
+            border-radius: 22px;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .cute-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px -5px rgba(180, 159, 204, 0.38);
+            border-color: #B49FCC;
         }
 
-        /* Prevent background scroll when modal or cart is open */
+        .cute-btn {
+            background-color: #B49FCC;
+            color: #ffffff;
+            border-radius: 9999px;
+            font-family: 'Fredoka', sans-serif;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(180, 159, 204, 0.4);
+        }
+
+        .cute-btn:hover {
+            background-color: #8F72AC;
+            transform: scale(1.03);
+            box-shadow: 0 6px 18px rgba(143, 114, 172, 0.5);
+        }
+
+        .drawer-slide {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         body.modal-open {
             overflow: hidden;
         }
 
-        /* Smooth slide-in for side drawer */
-        .drawer-slide {
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8DFEE;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B49FCC;
+        }
+
+        .cat-ears-frame {
+            position: relative;
+        }
+        .cat-ears-frame::before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #B49FCC;
+        }
+        .cat-ears-frame::after {
+            content: "";
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #B49FCC;
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen text-slate-900 pb-16">
+<body class="min-h-screen flex flex-col pb-24">
 
-    <!-- Sticky Top Navigation Bar -->
-    <header class="sticky top-0 z-30 bg-[#f9f8f6]/95 backdrop-blur-md border-b-2 border-[#1a1a1a] px-4 py-3 sm:px-8">
+    <header class="sticky top-0 z-30 bg-[#FAF6F0]/90 backdrop-blur-md border-b-2 border-glitz-lavenderSoft px-4 py-3 sm:px-8">
         <div class="max-w-3xl mx-auto flex items-center justify-between">
-            <!-- Brand Title -->
-            <div class="flex flex-col">
-                <span class="text-lg font-bold tracking-tight text-[#1a1a1a] uppercase leading-none">GLITZPASTRIES</span>
-                <span class="text-[10px] tracking-widest text-neutral-500 font-medium uppercase mt-0.5">Campus Pre-Order Store</span>
+            <div class="flex items-center gap-3">
+                <!-- Circular Logo Vector Icon -->
+                <div class="w-11 h-11 rounded-full bg-white flex items-center justify-center border-2 border-glitz-plum shadow-xs overflow-hidden">
+                   <img src="logo.jpg" alt="Glitz Pastries Logo" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="font-script text-3xl text-glitz-plum leading-none">glitz pastries</h1>
+                    <p class="text-[10px] font-bold tracking-widest text-glitz-lavenderDark uppercase mt-0.5">Freshly Baked Sweet Treats</p>
+                </div>
             </div>
 
-            <!-- Top Right Fixed Cart Button -->
-            <button onclick="toggleCart(true)" class="relative flex items-center gap-2 px-3 py-1.5 bg-[#1a1a1a] text-white rounded-lg border border-[#1a1a1a] hover:bg-neutral-800 transition-colors shadow-sm">
+            <button onclick="toggleCart(true)" class="relative cute-btn px-4 py-2 flex items-center gap-2 text-xs font-bold tracking-wide">
                 <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                <span class="text-xs font-semibold tracking-wide uppercase">Cart</span>
-                <span id="cart-badge" class="ml-1 bg-white text-[#1a1a1a] text-[11px] font-extrabold px-1.5 py-0.2 rounded-full min-w-[20px] text-center hidden">
+                <span class="font-cute hidden sm:inline">My Cart</span>
+                <span id="cart-badge" class="bg-glitz-blush text-glitz-plum text-[11px] font-extrabold px-2 py-0.5 rounded-full hidden">
                     0
                 </span>
             </button>
         </div>
     </header>
 
-    <!-- Main Content Container -->
     <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-6 sm:px-8 space-y-8">
         
-        <!-- Welcome Banner / Announcement -->
-        <div class="p-4 bg-white border-2 border-[#1a1a1a] rounded-xl space-y-1 shadow-[2px_2px_0px_0px_#1a1a1a]">
-            <p class="text-xs font-bold uppercase tracking-wider text-neutral-500">How to Order</p>
-            <p class="text-xs text-neutral-700 leading-relaxed">
-                Choose your pastries below, open your cart at the top right, fill in your details, and copy your order receipt directly to our Instagram or Messenger DMs!
-            </p>
+        <div class="cute-card p-6 text-center space-y-4 relative overflow-hidden bg-gradient-to-b from-white via-glitz-blushSoft/30 to-glitz-cream">
+            <div class="inline-flex relative items-center justify-center p-2 rounded-full bg-white border-2 border-glitz-lavenderSoft shadow-md my-1">
+                <svg class="w-44 h-44 sm:w-52 sm:h-52" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="98" fill="#FAF6F0"/>
+                    <circle cx="100" cy="100" r="92" stroke="#3C224C" stroke-width="3"/>
+                    <circle cx="100" cy="100" r="86" stroke="#3C224C" stroke-width="1.8"/>
+                    
+                    <path d="M 42,72 L 62,25 L 88,58 C 96,54 104,54 112,58 L 138,25 L 158,72 C 168,105 142,162 100,162 C 58,162 32,105 42,72 Z" stroke="#B49FCC" stroke-width="5.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M 38,155 C 80,182 145,182 156,152" stroke="#B49FCC" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+                    
+                    <g transform="translate(18, 80) scale(0.85)">
+                        <path d="M 8,24 C 8,-2 32,-2 32,24" stroke="#B49FCC" stroke-width="3" fill="none"/>
+                        <rect x="3" y="16" width="9" height="16" rx="4" fill="#B49FCC" stroke="#3C224C" stroke-width="1.5"/>
+                        <rect x="28" y="16" width="9" height="16" rx="4" fill="#B49FCC" stroke="#3C224C" stroke-width="1.5"/>
+                        <ellipse cx="20" cy="24" rx="10" ry="9" fill="#FAF6F0" stroke="#B49FCC" stroke-width="2"/>
+                        <path d="M 14,17 L 17,12 L 19,16" stroke="#B49FCC" stroke-width="1.5" fill="none"/>
+                        <path d="M 26,17 L 23,12 L 21,16" stroke="#B49FCC" stroke-width="1.5" fill="none"/>
+                        <circle cx="17" cy="23" r="1.2" fill="#3C224C"/>
+                        <circle cx="23" cy="23" r="1.2" fill="#3C224C"/>
+                        <path d="M 19,26 L 20,27 L 21,26" stroke="#3C224C" stroke-width="1" fill="none"/>
+                        <path d="M -2,12 Q -6,6 -2,2" stroke="#B49FCC" stroke-width="1.8" fill="none"/>
+                        <path d="M -8,22 Q -12,16 -8,10" stroke="#B49FCC" stroke-width="1.8" fill="none"/>
+                    </g>
+                    
+                    <g transform="translate(144, 88)">
+                        <path d="M 18,6 C 24,6 28,12 28,18 C 28,24 22,28 16,28 C 8,28 4,22 4,16 C 4,10 8,6 12,6 C 10,10 14,12 18,6 Z" fill="#E8D2A8" stroke="#3C224C" stroke-width="2"/>
+                        <circle cx="12" cy="14" r="1.5" fill="#3C224C"/>
+                        <circle cx="20" cy="20" r="1.5" fill="#3C224C"/>
+                        <circle cx="14" cy="22" r="1.2" fill="#3C224C"/>
+                    </g>
+
+                    <text x="100" y="112" font-family="'Great Vibes', cursive" font-size="52" fill="#3C224C" text-anchor="middle">glitz</text>
+                    <text x="100" y="136" font-family="'Quicksand', sans-serif" font-weight="700" font-size="16" fill="#3C224C" text-anchor="middle" letter-spacing="5">PASTRIES</text>
+                </svg>
+            </div>
+
+            <div>
+                <h2 class="font-script text-4xl text-glitz-plum">Glitzpastries Pre-Orders</h2>
+                <p class="text-xs font-bold text-glitz-plum/80 max-w-md mx-auto leading-relaxed mt-1">
+                    Handcrafted freshly baked cookies & pastries made with love!<br>
+                    Pickup Location: <span class="bg-glitz-lavenderSoft text-glitz-plum font-extrabold px-3 py-0.5 rounded-full border border-glitz-lavender/50">10 JAMES</span>
+                </p>
+            </div>
+
+            <div class="pt-1 flex flex-wrap justify-center gap-2 text-[11px] font-cute text-glitz-plum">
+                <span class="bg-glitz-blush/80 px-3 py-1 rounded-full border border-glitz-blush">Freshly Baked</span>
+                <span class="bg-glitz-lavenderSoft px-3 py-1 rounded-full border border-glitz-lavender/40">10 JAMES Pickup</span>
+            </div>
         </div>
 
-        <!-- SECTION 1: CLASSIC COOKIES -->
-        <section class="space-y-3">
-            <div class="flex items-center justify-between border-b-2 border-[#1a1a1a] pb-1.5">
-                <h2 class="text-sm font-bold uppercase tracking-wider text-[#1a1a1a]">Classic Cookies</h2>
-                <span class="text-xs font-semibold text-neutral-500">₱45.00 each</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <!-- Classic Choco Chip -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-xs font-bold text-[#1a1a1a]">Classic Choco Chip</h3>
-                        </div>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Crispy edges with soft center loaded with milk choco chunks.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱45</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('classic_choco', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-classic_choco" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('classic_choco', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Double Choco Chip -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Double Choco Chip</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Rich chocolate cocoa dough with white & dark choco chips.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱45</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('double_choco', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-double_choco" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('double_choco', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Red Velvet -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Red Velvet Cookie</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Smooth cocoa base with cream cheese white chocolate core.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱45</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('red_velvet', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-red_velvet" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('red_velvet', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: PREMIUM COOKIES -->
-        <section class="space-y-3">
-            <div class="flex items-center justify-between border-b-2 border-[#1a1a1a] pb-1.5">
-                <h2 class="text-sm font-bold uppercase tracking-wider text-[#1a1a1a]">Premium Flavors</h2>
-                <span class="text-xs font-semibold text-neutral-500">₱65 - ₱70</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <!-- Biscoff -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Biscoff</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Spiced cookie base stuffed with real Biscoff spread & biscuit.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱65</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('biscoff', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-biscoff" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('biscoff', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Nutella -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Nutella</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Butter dough stuffed with gooey hazelnut Nutella filling.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱65</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('nutella', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-nutella" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('nutella', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Matcha -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Matcha White Choco</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Authentic Japanese matcha dough with sweet white chocolate chunks.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱70</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('matcha', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-matcha" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('matcha', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- S'mores -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-xs font-bold text-[#1a1a1a]">Toasted S'mores</h3>
-                            <span class="text-[9px] uppercase tracking-wider font-extrabold px-1.5 py-0.5 border border-[#1a1a1a] bg-amber-100 rounded">Testing Batch</span>
-                        </div>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Graham cookie base topped with stretchy marshmallow & dark chocolate.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱70</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('smores', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-smores" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('smores', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: LIMITED EDITION -->
-        <section class="space-y-3">
-            <div class="flex items-center justify-between border-b-2 border-[#1a1a1a] pb-1.5">
+        <!-- Classic Cookies -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-glitz-lavenderSoft pb-2">
                 <div class="flex items-center gap-2">
-                    <h2 class="text-sm font-bold uppercase tracking-wider text-[#1a1a1a]">Limited Edition</h2>
-                    <span class="text-[9px] bg-[#1a1a1a] text-white px-1.5 py-0.5 rounded font-bold uppercase tracking-widest">Limited</span>
+                    <h2 class="font-cute text-base font-bold text-glitz-plum uppercase tracking-wider">Classic Cookies</h2>
                 </div>
+                <span class="text-xs font-bold text-glitz-plum bg-glitz-lavenderSoft px-3 py-1 rounded-full border border-glitz-lavender/30">₱45.00 each</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <!-- Dubai Cookie -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3 cat-ears-frame">
                     <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Dubai Pistachio Cookie</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Crispy toasted Kataifi kunafa with pistachio butter center.</p>
+                        <h3 class="font-cute font-bold text-sm text-glitz-plum">Classic Choco Chip</h3>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Crispy golden edges with a soft chewy center packed with chocolate chunks.</p>
                     </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱95</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('dubai_cookie', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-dubai_cookie" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('dubai_cookie', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱45</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('classic_choco', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-classic_choco" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('classic_choco', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dubai Chookie -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3 cat-ears-frame">
                     <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Dubai Chookie</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Cookie dough brownie hybrid stuffed with crunchy pistachio kunafa.</p>
+                        <h3 class="font-cute font-bold text-sm text-glitz-plum">Double Choco Chip</h3>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Rich dark cocoa cookie dough loaded with white and dark chocolate chips.</p>
                     </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱110</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('dubai_chookie', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-dubai_chookie" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('dubai_chookie', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: PASTRIES -->
-        <section class="space-y-3">
-            <div class="flex items-center justify-between border-b-2 border-[#1a1a1a] pb-1.5">
-                <h2 class="text-sm font-bold uppercase tracking-wider text-[#1a1a1a]">Baked Pastries</h2>
-                <span class="text-xs font-semibold text-neutral-500">Fresh Daily</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <!-- Banana Bread -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
-                    <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Banana Bread Slice</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Moist slice baked with real ripe bananas and light cinnamon.</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱60</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('banana_bread', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-banana_bread" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('banana_bread', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱45</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('double_choco', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-double_choco" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('double_choco', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Brownies -->
-                <div class="p-3.5 bg-white border-2 border-[#1a1a1a] rounded-xl flex flex-col justify-between space-y-3 shadow-[2px_2px_0px_0px_#1a1a1a]">
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3 cat-ears-frame">
                     <div>
-                        <h3 class="text-xs font-bold text-[#1a1a1a]">Fudgy Brownie Square</h3>
-                        <p class="text-[11px] text-neutral-600 mt-1 leading-snug">Rich, chewy chocolate fudge brownie square with crinkly top.</p>
+                        <h3 class="font-cute font-bold text-sm text-glitz-plum">Red Velvet Cookie</h3>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Smooth red velvet cookie dough filled with a sweet cream cheese center.</p>
                     </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-neutral-200">
-                        <span class="text-xs font-bold">₱50</span>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('brownies', -1)" class="w-6 h-6 border-2 border-[#1a1a1a] rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-100">-</button>
-                            <span id="qty-brownies" class="text-xs font-bold w-4 text-center">0</span>
-                            <button onclick="updateQuantity('brownies', 1)" class="w-6 h-6 border-2 border-[#1a1a1a] bg-[#1a1a1a] text-white rounded flex items-center justify-center font-bold text-xs hover:bg-neutral-800">+</button>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱45</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('red_velvet', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-red_velvet" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('red_velvet', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Fixed Bottom Floating Cart Bar for Mobile Accessibility -->
+        <!-- Premium Flavors -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-glitz-lavenderSoft pb-2">
+                <div class="flex items-center gap-2">
+                    <h2 class="font-cute text-base font-bold text-glitz-plum uppercase tracking-wider">Premium Flavors</h2>
+                </div>
+                <span class="text-xs font-bold text-glitz-plum bg-glitz-lavenderSoft px-3 py-1 rounded-full border border-glitz-lavender/30">₱65 - ₱70</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-cute font-bold text-sm text-glitz-plum">Lotus Biscoff</h3>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Spiced cookie dough stuffed with Biscoff spread & topped with a biscuit.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱65</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('biscoff', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-biscoff" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('biscoff', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-cute font-bold text-sm text-glitz-plum">Nutella Lava</h3>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Rich buttery cookie dough with a gooey molten hazelnut Nutella center.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱65</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('nutella', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-nutella" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('nutella', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-cute font-bold text-sm text-glitz-plum">Matcha White Choco</h3>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Japanese Uji matcha green tea dough studded with sweet white chocolate chips.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱70</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('matcha', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-matcha" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('matcha', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- S'mores Cookie (NOT AVAILABLE) -->
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3 opacity-60 bg-gray-50/50">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cute font-bold text-sm text-glitz-plum">S'mores Cookie</h3>
+                            <span class="text-[10px] font-cute bg-gray-200 text-gray-700 font-bold px-2 py-0.5 rounded-full">Not Available</span>
+                        </div>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Graham cracker crust, chocolate melt, topped with a soft toasted marshmallow.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱70</span>
+                        <div class="flex items-center gap-2">
+                            <button disabled class="w-7 h-7 rounded-full border border-gray-300 text-gray-400 font-bold text-xs cursor-not-allowed flex items-center justify-center">-</button>
+                            <span class="font-cute font-bold text-xs w-4 text-center text-gray-400">0</span>
+                            <button disabled class="w-7 h-7 rounded-full bg-gray-300 text-white font-bold text-xs cursor-not-allowed flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dubai Series (NOT AVAILABLE) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-glitz-lavenderSoft pb-2">
+                <div class="flex items-center gap-2">
+                    <h2 class="font-cute text-base font-bold text-glitz-plum uppercase tracking-wider">Dubai Series</h2>
+                </div>
+                <span class="text-xs font-bold text-glitz-plum/60 bg-gray-200 px-3 py-1 rounded-full">Currently Unavailable</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3 opacity-60 bg-gray-50/50">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cute font-bold text-sm text-glitz-plum">Dubai Pistachio Cookie</h3>
+                            <span class="text-[10px] font-cute bg-gray-200 text-gray-700 font-bold px-2 py-0.5 rounded-full">Not Available</span>
+                        </div>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Crispy Kataifi kunafa with rich pistachio cream inside thick cookie dough.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱95</span>
+                        <div class="flex items-center gap-2">
+                            <button disabled class="w-7 h-7 rounded-full border border-gray-300 text-gray-400 font-bold text-xs cursor-not-allowed flex items-center justify-center">-</button>
+                            <span class="font-cute font-bold text-xs w-4 text-center text-gray-400">0</span>
+                            <button disabled class="w-7 h-7 rounded-full bg-gray-300 text-white font-bold text-xs cursor-not-allowed flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3 opacity-60 bg-gray-50/50">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cute font-bold text-sm text-glitz-plum">Dubai Chookie</h3>
+                            <span class="text-[10px] font-cute bg-gray-200 text-gray-700 font-bold px-2 py-0.5 rounded-full">Not Available</span>
+                        </div>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Cookie and fudgy brownie mashup filled with pistachio kunafa crunch.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱110</span>
+                        <div class="flex items-center gap-2">
+                            <button disabled class="w-7 h-7 rounded-full border border-gray-300 text-gray-400 font-bold text-xs cursor-not-allowed flex items-center justify-center">-</button>
+                            <span class="font-cute font-bold text-xs w-4 text-center text-gray-400">0</span>
+                            <button disabled class="w-7 h-7 rounded-full bg-gray-300 text-white font-bold text-xs cursor-not-allowed flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fresh Pastries (AVAILABLE) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-glitz-lavenderSoft pb-2">
+                <div class="flex items-center gap-2">
+                    <h2 class="font-cute text-base font-bold text-glitz-plum uppercase tracking-wider">Fresh Pastries</h2>
+                </div>
+                <span class="text-xs font-bold text-glitz-plum bg-glitz-lavenderSoft px-3 py-1 rounded-full border border-glitz-lavender/30">₱50 - ₱60</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cute font-bold text-sm text-glitz-plum">Banana Bread Slice</h3>
+                        </div>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Moist banana loaf slice baked with cinnamon sugar and walnuts.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱60</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('banana_bread', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-banana_bread" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('banana_bread', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cute-card p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cute font-bold text-sm text-glitz-plum">Fudgy Brownie Square</h3>
+                        </div>
+                        <p class="text-[11px] text-glitz-plum/70 mt-1 leading-snug">Rich chocolate fudge brownie with a glossy crinkle top crust.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-glitz-lavenderSoft">
+                        <span class="font-cute font-bold text-sm text-glitz-plum">₱50</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('brownie', -1)" class="w-7 h-7 rounded-full border-2 border-glitz-lavender text-glitz-lavenderDark font-bold text-xs hover:bg-glitz-lavenderSoft flex items-center justify-center">-</button>
+                            <span id="qty-brownie" class="font-cute font-bold text-xs w-4 text-center">0</span>
+                            <button onclick="updateQuantity('brownie', 1)" class="w-7 h-7 rounded-full bg-glitz-lavender text-white font-bold text-xs hover:bg-glitz-lavenderDark flex items-center justify-center shadow-xs">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Floating Cart Footer -->
         <div class="pt-4">
-            <button onclick="toggleCart(true)" class="w-full py-3 bg-[#1a1a1a] text-white border-2 border-[#1a1a1a] rounded-xl flex items-center justify-between px-4 font-bold text-xs shadow-[3px_3px_0px_0px_#888888]">
+            <button onclick="toggleCart(true)" class="w-full py-3.5 bg-glitz-lavender text-white rounded-full flex items-center justify-between px-6 font-cute font-bold text-xs shadow-lg hover:bg-glitz-lavenderDark transition">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                    <span>Review Order</span>
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    <span>Review Cart & Checkout</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span id="bottom-cart-count">0 items</span>
                     <span>•</span>
-                    <span id="bottom-cart-total">₱0</span>
+                    <span id="bottom-cart-total" class="text-sm font-bold">₱0</span>
                 </div>
             </button>
         </div>
     </main>
 
-    <!-- SIDE DRAWER OVERLAY -->
-    <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/40 z-40 hidden transition-opacity" onclick="toggleCart(false)"></div>
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-glitz-plum/30 backdrop-blur-xs z-40 hidden transition-opacity" onclick="toggleCart(false)"></div>
 
-    <!-- SIDE DRAWER PANEL -->
-    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#f9f8f6] border-l-2 border-[#1a1a1a] z-50 transform translate-x-full drawer-slide flex flex-col justify-between shadow-2xl">
-        
-        <!-- Drawer Header -->
-        <div class="p-4 bg-white border-b-2 border-[#1a1a1a] flex items-center justify-between">
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-glitz-cream border-l-2 border-glitz-lavenderSoft z-50 transform translate-x-full drawer-slide flex flex-col justify-between shadow-2xl">
+        <div class="p-4 bg-white border-b-2 border-glitz-lavenderSoft flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                <h2 class="text-sm font-bold uppercase tracking-wider">Your Pre-Order Cart</h2>
+                <h2 class="font-cute text-sm font-bold uppercase tracking-wider text-glitz-plum">Your Sweet Cart</h2>
             </div>
-            <button onclick="toggleCart(false)" class="p-1 hover:bg-neutral-100 rounded-lg border border-neutral-300">
-                <i data-lucide="x" class="w-5 h-5 text-neutral-800"></i>
+            <button onclick="toggleCart(false)" class="p-1 text-glitz-plum/60 hover:text-glitz-plum hover:bg-glitz-lavenderSoft rounded-full">
+                <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
 
-        <!-- Drawer Content Area (Scrollable without bug) -->
         <div class="flex-1 overflow-y-auto p-4 space-y-6">
-            
-            <!-- Cart Items Summary List -->
+            <!-- Cart Items -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-300 pb-1">1. Selected Items</h3>
-                <div id="cart-items-list" class="space-y-2">
-                    <p class="text-xs text-neutral-500 italic py-2">Your cart is currently empty. Add treats to continue!</p>
+                <div class="flex items-center justify-between border-b border-glitz-lavenderSoft pb-1">
+                    <h3 class="font-cute text-xs font-bold uppercase tracking-wider text-glitz-lavenderDark">1. Selected Treats</h3>
                 </div>
-                <div class="flex justify-between items-center pt-2 border-t border-neutral-300 text-xs font-bold">
-                    <span>Total Amount:</span>
-                    <span id="drawer-total-display" class="text-sm">₱0</span>
+                <div id="cart-items-list" class="space-y-2">
+                    <p class="text-xs text-glitz-plum/50 italic py-3 text-center">Your cart is empty! Add some treats above.</p>
+                </div>
+                <div class="flex justify-between items-center pt-2 border-t border-glitz-lavenderSoft font-cute font-bold text-xs text-glitz-plum">
+                    <span>Subtotal Amount:</span>
+                    <span id="drawer-total-display" class="text-base text-glitz-lavenderDark">₱0</span>
                 </div>
             </div>
 
             <!-- Customer Details Form -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-300 pb-1">2. Customer Info</h3>
+                <div class="border-b border-glitz-lavenderSoft pb-1">
+                    <h3 class="font-cute text-xs font-bold uppercase tracking-wider text-glitz-lavenderDark">2. Customer Info</h3>
+                </div>
                 
-                <div class="space-y-2.5 text-xs">
+                <div class="space-y-3 text-xs">
                     <div>
-                        <label class="block font-bold text-neutral-800 mb-1">Full Name *</label>
-                        <input type="text" id="cust-name" placeholder="Juan Dela Cruz" class="w-full p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg focus:outline-none text-xs font-medium">
+                        <label class="block font-bold text-glitz-plum mb-1">Full Name *</label>
+                        <input type="text" id="cust-name" placeholder="Juan Dela Cruz" value="Juan Dela Cruz" class="w-full p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl focus:outline-none focus:border-glitz-lavender text-xs font-bold text-glitz-plum">
                     </div>
 
                     <div>
-                        <label class="block font-bold text-neutral-800 mb-1">Grade & Section *</label>
-                        <input type="text" id="cust-grade" placeholder="Grade 9 - Genesis" class="w-full p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg focus:outline-none text-xs font-medium">
+                        <label class="block font-bold text-glitz-plum mb-1">Grade & Section *</label>
+                        <input type="text" id="cust-grade" placeholder="Grade 9 - Genesis" value="Grade 9 - Genesis" class="w-full p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl focus:outline-none focus:border-glitz-lavender text-xs font-bold text-glitz-plum">
                     </div>
 
                     <div>
-                        <label class="block font-bold text-neutral-800 mb-1">IG Handle or Messenger Name *</label>
-                        <input type="text" id="cust-social" placeholder="@juandelacruz or Juan Dela Cruz" class="w-full p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg focus:outline-none text-xs font-medium">
+                        <label class="block font-bold text-glitz-plum mb-1">Social Media Handle (IG / Messenger) *</label>
+                        <input type="text" id="cust-social" placeholder="@juandelacruz" class="w-full p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl focus:outline-none focus:border-glitz-lavender text-xs font-bold text-glitz-plum">
                     </div>
                 </div>
             </div>
 
             <!-- Fulfillment Option -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-300 pb-1">3. Fulfillment Option</h3>
+                <div class="border-b border-glitz-lavenderSoft pb-1">
+                    <h3 class="font-cute text-xs font-bold uppercase tracking-wider text-glitz-lavenderDark">3. Fulfillment Option</h3>
+                </div>
                 
                 <div class="grid grid-cols-2 gap-2 text-xs">
-                    <label class="p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg flex flex-col gap-1 cursor-pointer">
-                        <div class="flex items-center gap-1.5 font-bold">
-                            <input type="radio" name="fulfillment" value="Room Delivery" checked class="accent-[#1a1a1a]">
-                            <span>Room Delivery</span>
+                    <label class="p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl flex flex-col gap-1 cursor-pointer hover:border-glitz-lavender transition">
+                        <div class="flex items-center gap-2 font-bold text-glitz-plum">
+                            <input type="radio" name="fulfillment" value="10 JAMES Pickup" checked class="accent-glitz-lavender">
+                            <span>10 JAMES</span>
                         </div>
-                        <span class="text-[10px] text-neutral-500 pl-4">Delivered to classroom</span>
+                        <span class="text-[10px] text-glitz-plum/60 pl-5">Default Pickup Location</span>
                     </label>
 
-                    <label class="p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg flex flex-col gap-1 cursor-pointer">
-                        <div class="flex items-center gap-1.5 font-bold">
-                            <input type="radio" name="fulfillment" value="Classroom Pickup" class="accent-[#1a1a1a]">
-                            <span>Campus Pickup</span>
+                    <label class="p-3 bg-white border-2 border-glitz-lavenderSoft rounded-2xl flex flex-col gap-1 cursor-pointer hover:border-glitz-lavender transition">
+                        <div class="flex items-center gap-2 font-bold text-glitz-plum">
+                            <input type="radio" name="fulfillment" value="Classroom Delivery" class="accent-glitz-lavender">
+                            <span>Classroom</span>
                         </div>
-                        <span class="text-[10px] text-neutral-500 pl-4">Meetup at 10 - James</span>
+                        <span class="text-[10px] text-glitz-plum/60 pl-5">Deliver to section</span>
                     </label>
                 </div>
             </div>
 
-            <!-- Payment Options -->
+            <!-- GCash Payment Box -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-300 pb-1">4. Payment Details</h3>
-                
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <button type="button" onclick="selectPayment('gcash')" id="pay-btn-gcash" class="p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg font-bold text-left flex items-center justify-between">
-                        <span>GCash</span>
-                        <i data-lucide="check-circle-2" id="gcash-check" class="w-4 h-4 text-[#1a1a1a]"></i>
-                    </button>
-
-                    <button type="button" onclick="selectPayment('cod')" id="pay-btn-cod" class="p-2.5 bg-neutral-100 border-2 border-neutral-300 text-neutral-500 rounded-lg font-bold text-left flex items-center justify-between">
-                        <span>Pay on Delivery</span>
-                        <i data-lucide="circle" id="cod-check" class="w-4 h-4 text-neutral-400"></i>
-                    </button>
+                <div class="border-b border-glitz-lavenderSoft pb-1">
+                    <h3 class="font-cute text-xs font-bold uppercase tracking-wider text-glitz-lavenderDark">4. GCash Payment</h3>
                 </div>
-
-                <!-- GCash Box -->
-                <div id="gcash-info-panel" class="p-3 bg-white border-2 border-[#1a1a1a] rounded-lg space-y-2 text-xs">
+                
+                <div class="p-3.5 bg-white border-2 border-glitz-lavenderSoft rounded-2xl space-y-2.5 text-xs">
                     <div class="flex items-center justify-between">
-                        <span class="font-bold text-neutral-700">GCash Number:</span>
-                        <div class="flex items-center gap-1 bg-neutral-100 px-2 py-1 rounded border border-neutral-300">
-                            <span class="font-mono font-bold text-[#1a1a1a]">09944824652</span>
-                            <button onclick="copyNumber('09944824652')" class="text-[10px] uppercase font-extrabold text-blue-700 ml-1 hover:underline">Copy</button>
+                        <span class="font-bold text-glitz-plum">GCash Number:</span>
+                        <div class="flex items-center gap-1.5 bg-glitz-lavenderSoft px-2.5 py-1 rounded-xl">
+                            <span class="font-mono font-bold text-glitz-plum">09944824652</span>
+                            <button onclick="copyNumber('09944824652')" class="text-[10px] uppercase font-cute font-bold text-glitz-lavenderDark hover:underline ml-1">Copy</button>
                         </div>
                     </div>
-                    <p class="text-[11px] text-neutral-600 bg-amber-50 border border-amber-200 p-2 rounded leading-snug">
-                        ⚠️ <strong>Important:</strong> After copying, send payment via GCash and <strong>take a screenshot of the receipt</strong>. You will need to attach it when opening Instagram DMs!
+                    <p class="text-[11px] text-glitz-plum/90 bg-glitz-blushSoft p-2.5 rounded-xl border border-glitz-blush leading-relaxed">
+                        Note: Please take a screenshot of your GCash payment and send it along with your order summary!
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Drawer Footer Action -->
-        <div class="p-4 bg-white border-t-2 border-[#1a1a1a] space-y-2">
-            <button onclick="generateOrderReceipt()" class="w-full py-3 bg-[#1a1a1a] text-white border-2 border-[#1a1a1a] rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-neutral-800 transition">
-                <i data-lucide="copy" class="w-4 h-4"></i>
+        <div class="p-4 bg-white border-t-2 border-glitz-lavenderSoft">
+            <button onclick="generateOrderReceipt()" class="w-full cute-btn py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
                 <span>Generate Order Receipt</span>
             </button>
-            <p class="text-[10px] text-neutral-500 text-center">Form details will be pre-formatted for Instagram/Messenger DMs.</p>
         </div>
     </aside>
 
-    <!-- ORDER RECEIPT MODAL -->
-    <div id="receipt-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white border-2 border-[#1a1a1a] rounded-xl p-5 max-w-sm w-full space-y-4 shadow-[4px_4px_0px_0px_#1a1a1a]">
-            
-            <div class="flex items-center justify-between border-b-2 border-[#1a1a1a] pb-2">
-                <h3 class="text-xs font-bold uppercase tracking-wider">Order Summary</h3>
-                <button onclick="closeReceiptModal()" class="text-neutral-500 hover:text-black">
+    <div id="receipt-modal" class="fixed inset-0 bg-glitz-plum/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-glitz-lavenderSoft rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b-2 border-glitz-lavenderSoft pb-2">
+                <div class="flex items-center gap-2">
+                    <h3 class="font-cute text-sm font-bold uppercase tracking-wider text-glitz-plum">Order Receipt</h3>
+                </div>
+                <button onclick="closeReceiptModal()" class="text-glitz-plum/50 hover:text-glitz-plum">
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
             </div>
 
-            <!-- Receipt Text Display -->
-            <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-300 font-mono text-[11px] space-y-1 text-neutral-800 whitespace-pre-wrap leading-tight max-h-60 overflow-y-auto" id="modal-receipt-text">
-            </div>
+            <div class="bg-glitz-cream p-3.5 rounded-2xl border border-glitz-lavenderSoft font-mono text-[11px] text-glitz-plum leading-relaxed max-h-56 overflow-y-auto whitespace-pre-wrap" id="modal-receipt-text"></div>
 
-            <p class="text-[11px] text-amber-800 bg-amber-50 p-2 rounded border border-amber-200">
-                📲 Click below to copy this summary, then paste it in our Instagram DMs along with your <strong>GCash payment screenshot</strong>!
+            <p class="text-[11px] text-glitz-plum/80 bg-glitz-blushSoft p-2.5 rounded-xl border border-glitz-blush">
+                Please copy this order summary and send it to our Instagram DMs together with your GCash payment screenshot!
             </p>
 
             <div class="space-y-2">
-                <button onclick="copyAndOpenIG()" class="w-full py-2.5 bg-[#1a1a1a] text-white border-2 border-[#1a1a1a] rounded-lg font-bold text-xs flex items-center justify-center gap-2">
+                <button onclick="copyAndOpenIG()" class="w-full cute-btn py-3 text-xs font-bold flex items-center justify-center gap-2">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
-                    <span>Copy & Open Instagram DMs</span>
+                    <span>Copy Receipt & Open Instagram</span>
                 </button>
                 
-                <button onclick="closeReceiptModal()" class="w-full py-2 bg-neutral-100 text-neutral-700 border border-neutral-300 rounded-lg font-semibold text-xs">
-                    Close Window
+                <button onclick="closeReceiptModal()" class="w-full py-2 bg-glitz-lavenderSoft text-glitz-plum rounded-full font-bold text-xs hover:bg-glitz-lavenderSoft/80 transition">
+                    Back to Store
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-4 py-2 rounded-lg text-xs font-bold border border-white shadow-lg hidden z-50">
-        Notification message
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-glitz-plum text-white px-5 py-2.5 rounded-full text-xs font-cute font-bold shadow-xl hidden z-50 flex items-center gap-2">
+        <span id="toast-text">Notification</span>
     </div>
 
     <script>
-        // Products Catalog
         const PRODUCTS = {
             classic_choco: { name: 'Classic Choco Chip', price: 45 },
             double_choco: { name: 'Double Choco Chip', price: 45 },
@@ -498,15 +595,11 @@
             biscoff: { name: 'Lotus Biscoff Cookie', price: 65 },
             nutella: { name: 'Nutella Lava Cookie', price: 65 },
             matcha: { name: 'Matcha White Choco', price: 70 },
-            smores: { name: 'Toasted S\'mores', price: 70 },
-            dubai_cookie: { name: 'Dubai Pistachio Cookie', price: 95 },
-            dubai_chookie: { name: 'Dubai Chookie', price: 110 },
             banana_bread: { name: 'Banana Bread Slice', price: 60 },
-            brownies: { name: 'Fudgy Brownie Square', price: 50 },
+            brownie: { name: 'Fudgy Brownie Square', price: 50 },
         };
 
         let cart = {};
-        let selectedPaymentMethod = 'gcash';
 
         function updateQuantity(key, delta) {
             const currentQty = cart[key] || 0;
@@ -518,7 +611,6 @@
                 cart[key] = newQty;
             }
 
-            // Update UI Counters
             const qtyElement = document.getElementById(`qty-${key}`);
             if (qtyElement) qtyElement.innerText = newQty;
 
@@ -538,7 +630,6 @@
         function renderCart() {
             const { total, totalCount } = calculateTotal();
             
-            // Top Badge
             const badge = document.getElementById('cart-badge');
             if (totalCount > 0) {
                 badge.innerText = totalCount;
@@ -547,16 +638,14 @@
                 badge.classList.add('hidden');
             }
 
-            // Bottom Mobile Floating Bar
             document.getElementById('bottom-cart-count').innerText = `${totalCount} item${totalCount === 1 ? '' : 's'}`;
             document.getElementById('bottom-cart-total').innerText = `₱${total}`;
 
-            // Drawer Items List
             const cartItemsList = document.getElementById('cart-items-list');
             document.getElementById('drawer-total-display').innerText = `₱${total}`;
 
             if (Object.keys(cart).length === 0) {
-                cartItemsList.innerHTML = '<p class="text-xs text-neutral-500 italic py-2">Your cart is currently empty. Add treats to continue!</p>';
+                cartItemsList.innerHTML = '<p class="text-xs text-glitz-plum/50 italic py-3 text-center">Your cart is empty! Add some treats above.</p>';
                 return;
             }
 
@@ -565,15 +654,15 @@
                 const item = PRODUCTS[key];
                 const subtotal = item.price * qty;
                 html += `
-                    <div class="flex items-center justify-between bg-white p-2 rounded-lg border border-neutral-300 text-xs">
+                    <div class="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-glitz-lavenderSoft text-xs">
                         <div>
-                            <p class="font-bold text-[#1a1a1a]">${item.name}</p>
-                            <p class="text-[10px] text-neutral-500">₱${item.price} x ${qty} = ₱${subtotal}</p>
+                            <p class="font-bold text-glitz-plum">${item.name}</p>
+                            <p class="text-[10px] text-glitz-plum/60">₱${item.price} x ${qty} = ₱${subtotal}</p>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="updateQuantity('${key}', -1)" class="w-5 h-5 border border-neutral-300 rounded font-bold hover:bg-neutral-100 flex items-center justify-center">-</button>
-                            <span class="font-bold w-4 text-center text-[11px]">${qty}</span>
-                            <button onclick="updateQuantity('${key}', 1)" class="w-5 h-5 border border-neutral-300 rounded font-bold hover:bg-neutral-100 flex items-center justify-center">+</button>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('${key}', -1)" class="w-6 h-6 rounded-full border border-glitz-lavender text-glitz-lavenderDark font-bold flex items-center justify-center">-</button>
+                            <span class="font-cute font-bold w-4 text-center text-xs">${qty}</span>
+                            <button onclick="updateQuantity('${key}', 1)" class="w-6 h-6 rounded-full bg-glitz-lavender text-white font-bold flex items-center justify-center">+</button>
                         </div>
                     </div>
                 `;
@@ -596,30 +685,6 @@
             }
         }
 
-        function selectPayment(method) {
-            selectedPaymentMethod = method;
-            const gcashBtn = document.getElementById('pay-btn-gcash');
-            const codBtn = document.getElementById('pay-btn-cod');
-            const gcashCheck = document.getElementById('gcash-check');
-            const codCheck = document.getElementById('cod-check');
-            const gcashPanel = document.getElementById('gcash-info-panel');
-
-            if (method === 'gcash') {
-                gcashBtn.className = 'p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg font-bold text-left flex items-center justify-between';
-                codBtn.className = 'p-2.5 bg-neutral-100 border-2 border-neutral-300 text-neutral-500 rounded-lg font-bold text-left flex items-center justify-between';
-                gcashCheck.setAttribute('data-lucide', 'check-circle-2');
-                codCheck.setAttribute('data-lucide', 'circle');
-                gcashPanel.classList.remove('hidden');
-            } else {
-                codBtn.className = 'p-2.5 bg-white border-2 border-[#1a1a1a] rounded-lg font-bold text-left flex items-center justify-between';
-                gcashBtn.className = 'p-2.5 bg-neutral-100 border-2 border-neutral-300 text-neutral-500 rounded-lg font-bold text-left flex items-center justify-between';
-                codCheck.setAttribute('data-lucide', 'check-circle-2');
-                gcashCheck.setAttribute('data-lucide', 'circle');
-                gcashPanel.classList.add('hidden');
-            }
-            lucide.createIcons();
-        }
-
         function copyNumber(num) {
             const tempInput = document.createElement('input');
             tempInput.value = num;
@@ -627,12 +692,12 @@
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-            showToast('GCash Number copied to clipboard!');
+            showToast('GCash Number (09944824652) copied!');
         }
 
         function showToast(msg) {
             const toast = document.getElementById('toast');
-            toast.innerText = msg;
+            document.getElementById('toast-text').innerText = msg;
             toast.classList.remove('hidden');
             setTimeout(() => {
                 toast.classList.add('hidden');
@@ -654,7 +719,7 @@
             }
 
             if (!name || !grade || !social) {
-                showToast('Please complete all customer details!');
+                showToast('Please fill in your name, section, and IG handle!');
                 return;
             }
 
@@ -664,18 +729,19 @@
                 orderItemsFormatted += `• ${item.name} x${qty} (₱${item.price * qty})\n`;
             }
 
-            generatedTextForCopy = `🍩 GLITZPASTRIES ORDER RECEIPT 🍩
+            generatedTextForCopy = `GLITZPASTRIES PRE-ORDER
 ------------------------------
 NAME: ${name}
 SECTION: ${grade}
 HANDLE: ${social}
 ------------------------------
-ITEMS ORDERED:
+ITEMS:
 ${orderItemsFormatted}------------------------------
 TOTAL: ₱${total}
 FULFILLMENT: ${fulfillment}
-PAYMENT: ${selectedPaymentMethod.toUpperCase()} ${selectedPaymentMethod === 'gcash' ? '(09944824652)' : ''}
-------------------------------`;
+PAYMENT: GCash (09944824652)
+------------------------------
+(GCash Screenshot Attached Below)`;
 
             document.getElementById('modal-receipt-text').innerText = generatedTextForCopy;
             document.getElementById('receipt-modal').classList.remove('hidden');
@@ -697,10 +763,9 @@ PAYMENT: ${selectedPaymentMethod.toUpperCase()} ${selectedPaymentMethod === 'gca
             
             setTimeout(() => {
                 window.open('https://instagram.com', '_blank');
-            }, 1000);
+            }, 800);
         }
 
-        // Initialize icons on DOM ready
         window.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         });
